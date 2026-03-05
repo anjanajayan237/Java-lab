@@ -1,32 +1,83 @@
-class Product {
-    int pcode;
-    String pname;
-    double price;
-    Product(int pcode, String pname, double price) {
-        this.pcode = pcode;
-        this.pname = pname;
-        this.price = price;
+import java.util.Scanner;
+
+class Employee {
+    int empid;
+    String name;
+    double salary;
+    String address;
+
+    Employee(int id, String n, double s, String addr) {
+        empid = id;
+        name = n;
+        salary = s;
+        address = addr;
     }
 }
 
-public class Main {
+class Teacher extends Employee {
+    String department;
+    String subject;
+
+    Teacher(int id, String n, double s, String addr, String dept, String sub) {
+        super(id, n, s, addr);
+        department = dept;
+        subject = sub;
+    }
+
+    void display() {
+        System.out.println("Employee ID: " + empid);
+        System.out.println("Name: " + name);
+        System.out.println("Salary: " + salary);
+        System.out.println("Address: " + address);
+        System.out.println("Department: " + department);
+        System.out.println("Subject: " + subject);
+        System.out.println("-----------------------");
+    }
+}
+
+public class Main 
+{
     public static void main(String[] args) {
 
-        Product p1 = new Product(101, "bag", 600);
-        Product p2 = new Product(102, "pencil", 5);
-        Product p3 = new Product(103, "book", 15);
+        Scanner sc = new Scanner(System.in);
 
-        Product lowest = p1;
+        System.out.print("Enter number of teachers: ");
+        int n = sc.nextInt();
+        sc.nextLine();
 
-        if (p2.price < lowest.price) {
-            lowest = p2;
+        Teacher[] t = new Teacher[n];
+
+        for (int i = 0; i < n; i++) {
+
+            System.out.println("Enter details of teacher " + (i + 1));
+
+            System.out.print("Emp ID: ");
+            int id = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Name: ");
+            String name = sc.nextLine();
+
+            System.out.print("Salary: ");
+            double salary = sc.nextDouble();
+            sc.nextLine();
+
+            System.out.print("Address: ");
+            String addr = sc.nextLine();
+
+            System.out.print("Department: ");
+            String dept = sc.nextLine();
+
+            System.out.print("Subject: ");
+            String sub = sc.nextLine();
+
+            t[i] = new Teacher(id, name, salary, addr, dept, sub);
         }
-        if (p3.price < lowest.price) {
-            lowest = p3;
+
+        System.out.println("\nTeacher Details");
+
+        for (int i = 0; i < n; i++) {
+            t[i].display();
         }
-        System.out.println("Product with lowest price:");
-        System.out.println("Product Code: " + lowest.pcode);
-        System.out.println("Product Name: " + lowest.pname);
-        System.out.println("Price: " + lowest.price);
     }
 }
